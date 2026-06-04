@@ -69,6 +69,7 @@ function Post(props){
             <Pressable onPress={quitarLike} style={styles.botonLike}>
                 <Text>💔</Text>
             </Pressable>}
+            <Text> {props.data.likes.length} likes</Text>
             <Pressable>
                 <TextInput
                     style={styles.inputComentario}
