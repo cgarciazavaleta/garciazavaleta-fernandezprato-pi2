@@ -1,6 +1,6 @@
 import React from "react";
 import {View, Text, Pressable, TextInput, StyleSheet} from 'react-native'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from '../../firebase/config';
 
 
@@ -10,11 +10,19 @@ function Login(props){
     const[login,setLogin] = useState([])
     const [loginError, setLoginError] = useState("");
 
+    useEffect(()=>{
+        auth.onAuthStateChanged(user  =>{
+            if(user){
+                props.navigation.navigate("HomeMenu")
+            }
+        })
+    }, [])
+
     function onSubmit(email, password){
         if(!email.includes("@")){
             setLoginError("Email mal formateado")
         }
-        if (password.lenght< 6){
+        if (password.length< 6){
             setLoginError("La password debe tener una longitud minima de 6 caracteres")
         }
         auth.signInWithEmailAndPassword(email, password)
