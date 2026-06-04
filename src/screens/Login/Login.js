@@ -8,6 +8,7 @@ function Login(props){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const[login,setLogin] = useState([])
+    const [loginError, setLoginError] = useState("");
 
     function onSubmit(email, password){
         if(!email.includes("@")){
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     input: {
-        height: 20,
+        height: 45,
         paddingVertical: 15,
         paddingHorizontal: 10,
         borderWidth: 1,
