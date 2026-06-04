@@ -6,7 +6,7 @@ import { db, auth } from '../../firebase/config';
 
 function Register(props){
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const[register, setRegister] = useState(false)
 
@@ -15,11 +15,14 @@ function Register(props){
         .then( response => {
             db.collection('users').add({
                 email: email,
-                userName: username,
+                userName: userName,
                 createdAt: Date.now()
             })
             .then(() => {
-                props.navigation.navigate('Login')
+                auth.signOut()
+                .then(()=>{
+                    props.navigation.navigate('Login')
+                })
             })   
             setRegister(true);
         }) 
@@ -40,8 +43,8 @@ function Register(props){
               style={styles.input}
               keyboardType="default"
               placeholder="user name"
-              onChangeText={text => setUsername(text) }
-              value={username}
+              onChangeText={text => setUserName(text) }
+              value={userName}
             />
              <TextInput 
               style={styles.input}
@@ -51,7 +54,7 @@ function Register(props){
               onChangeText={text => setPassword(text) }
               value={password}
             />
-            <Pressable style={styles.btn} onPress={()=>onSubmit(email, password, username)}>
+            <Pressable style={styles.btn} onPress={()=>onSubmit(email, password, userName)}>
               <Text style={styles.txt}>Registrarse</Text>
             </Pressable>
             <Pressable style={styles.boton} onPress={()=> props.navigation.navigate('Login')}>
