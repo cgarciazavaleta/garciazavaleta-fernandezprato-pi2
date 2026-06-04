@@ -1,13 +1,16 @@
 import React from "react";
 import {View, Text, Pressable, TextInput, StyleSheet} from 'react-native'
 import { useState } from "react";
+import { db, auth } from '../../firebase/config';
 
 
 function Register(props){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    function onSubmit () {
+    const[register, setRegister] = useState(false)
+
+    function onSubmit (email, password, userName) {
         auth.createUserWithEmailAndPassword(email, password)
         .then( response => {
             db.collection('users').add({
@@ -17,7 +20,8 @@ function Register(props){
             })
             .then(() => {
                 props.navigation.navigate('Login')
-            })     
+            })   
+            setRegister(true);
         }) 
         .catch( error => {
             console.log(error)
@@ -25,10 +29,6 @@ function Register(props){
     }
     return(
         <View style={styles.container}>
-            <Pressable onPress={()=> props.navigation.navigate('Login')}>
-                    <Text>Ir a Login</Text>
-            </Pressable>
-            <View>
             <TextInput 
               style={styles.input}
               keyboardType="email-adress"
@@ -51,10 +51,12 @@ function Register(props){
               onChangeText={text => setPassword(text) }
               value={password}
             />
-            <Pressable style={styles.btn} onPress={()=>onSubmit()}>
-              <Text style={styles.txt}>Enter</Text>
+            <Pressable style={styles.btn} onPress={()=>onSubmit(email, password, username)}>
+              <Text style={styles.txt}>Registrarse</Text>
             </Pressable>
-        </View>
+            <Pressable style={styles.boton} onPress={()=> props.navigation.navigate('Login')}>
+                    <Text>Ya tengo cuenta</Text>
+            </Pressable>
     </View>
         
     )
@@ -86,7 +88,20 @@ const styles = StyleSheet.create({
     txt: {
         color: '#fff',
         textAlign: 'center'
-    }
+    },
+    boton:{
+        width:125,
+        paddingVertical:3,
+        paddingBottom:6,
+        alignSelf: "center",
+        alignItems:"center",
+        borderWidth: 2,
+        borderColor: "#ccc",
+        borderStyle: "solid",
+        borderRadius: 6,
+        marginVertical: 10,
+        backgroundColor: '#dddddddd',
+    },
 });
 
 
