@@ -70,16 +70,7 @@ function Post(props){
                 <Text>💔</Text>
             </Pressable>}
             <Text> {props.data.likes.length} likes</Text>
-            <Pressable>
-                <TextInput
-                    style={styles.inputComentario}
-                    placeholder="Nuevo comentario"
-                    keyboardType="default"
-                    onChangeText={texto => setComentario(texto)}
-                    value={comentario}>
-                </TextInput>
-            </Pressable>
-            <Pressable onPress={agregarComentario} style={styles.botonComentar}>
+            <Pressable onPress={()=> props.navigation.navigate('Comentarios')} style={styles.botonComentar}>
                     <Text style={styles.textoBotonComentar}>Comentar</Text>
             </Pressable>
         </View>
