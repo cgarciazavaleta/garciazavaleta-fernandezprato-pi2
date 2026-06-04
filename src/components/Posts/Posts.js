@@ -1,10 +1,11 @@
-import { View, Text, Pressable, StyleSheet } from "react-native" // Agregué StyleSheet acá
+import { View, Text, Pressable, StyleSheet, TextInput } from "react-native" 
 import { auth, db } from "../../firebase/config"
 import firebase from "firebase"
 import { useEffect, useState } from "react"
 
 function Post(props){
     const[like,setLike]= useState(false)
+    const[comentario, setComentario] = useState("")
     
     useEffect(()=>{
         if (props.data.likes.includes(auth.currentUser.email)){
@@ -35,6 +36,27 @@ function Post(props){
             setLike(false)
         })
     }
+    function agregarComentario(){
+        if (comentario == ""){
+            console.log("No puedes enviar un comentario vacio")
+        }
+        else {
+            const nuevoComentario = {
+                autor: auth.currentUser.email,
+                texto: nuevoComentario,
+                fecha: Date.now()
+            }
+        db.collection("posts")
+        .doc(props.id)
+        .update({
+           
+            comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
+        })
+        .then(()=>{
+            setComentario(""); 
+        })
+        }
+    } 
 
     return(
         <View style={styles.cajaPost}>
@@ -47,7 +69,18 @@ function Post(props){
             <Pressable onPress={quitarLike} style={styles.botonLike}>
                 <Text>💔</Text>
             </Pressable>}
-
+            <Pressable>
+                <TextInput
+                    style={styles.inputComentario}
+                    placeholder="Nuevo comentario"
+                    keyboardType="default"
+                    onChangeText={texto => setComentario(texto)}
+                    value={comentario}>
+                </TextInput>
+            </Pressable>
+            <Pressable onPress={agregarComentario} style={styles.botonComentar}>
+                    <Text style={styles.textoBotonComentar}>Comentar</Text>
+            </Pressable>
         </View>
     )
 }
@@ -61,6 +94,11 @@ const styles = StyleSheet.create({
         borderRadius: 5,         
         backgroundColor: "#fff"  
     },
+    cajaComentarios: {
+        borderTopWidth: 1,           
+        borderTopColor: "#eee",
+        paddingTop: 10
+    },
     texto: {
         fontSize: 16,
         marginBottom: 10       
@@ -72,6 +110,24 @@ const styles = StyleSheet.create({
     },
     botonLike: {
         marginTop: 5
+    },
+    inputComentario: {
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 4,
+        padding: 5,
+        margin: 10,
+        height: 40
+    },
+    botonComentar: {
+        backgroundColor: '#941f14ff',
+        padding: 10,
+        margin: 5,
+        borderRadius: 4,
+        alignItems: "center"
+    },
+    textoBotonComentar: {
+        fontWeight: "bold"
     }
 });
 
