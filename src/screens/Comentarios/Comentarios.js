@@ -2,62 +2,110 @@ import { View, Text, Pressable, StyleSheet, TextInput } from "react-native"
 import { auth, db } from "../../firebase/config"
 import firebase from "firebase"
 import { useEffect, useState } from "react"
+import { FlatList } from "react-native-web"
 
 function Comentarios(props){
+    const id = props.route.params.id
+
+    const[comentario,setComentario] = useState("")
+    const[like,setLike]= useState(false)
+    const[post,setPost]= useState([])
+
+    useEffect(()=>{
+        db.collection("posts")
+        .doc(id)
+        .onSnapshot(doc=>{
+            setPost(doc.data())
+        })
+    },[])
+
     function agregarComentario(){
-            if (comentario == ""){
-                console.log("No puedes enviar un comentario vacio")
+        if (comentario == ""){
+            console.log("No puedes enviar un comentario vacio")
+        }
+        else {
+            const nuevoComentario = {
+                autor: auth.currentUser.email,
+                texto: comentario,
+                fecha: Date.now()
             }
-            else {
-                const nuevoComentario = {
-                    autor: auth.currentUser.email,
-                    texto: nuevoComentario,
-                    fecha: Date.now()
-                }
-            db.collection("posts")
-            .doc(props.id)
-            .update({
-               
-                comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
-            })
-            .then(()=>{
-                setComentario(""); 
-            })
-            }
-        } 
+        db.collection("posts")
+        .doc(props.id)
+        .update({
+           
+            comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
+        })
+        .then(()=>{
+            setComentario(""); 
+        })
+        }
+    } 
+
+    function darLike(){
+        db.collection("posts")
+        .doc(props.id)
+        .update({
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+        })
+        .then(()=>{
+            setLike(true)
+        })
+    }
+
+    function quitarLike(){
+        db.collection("posts")
+        .doc(props.id)
+        .update({
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+        })
+        .then(()=>{
+            setLike(false)
+        })
+    }
+
     return(
-        <View>
-            <Text style={styles.autor}>Creado por: {props.data.email}</Text>
-                        <Text style={styles.texto}>{props.data.descriptionPost}</Text>
-                        
-                        {!like? <Pressable onPress={darLike} style={styles.botonLike}>
-                            <Text>❤️</Text>
-                        </Pressable>:
-                        <Pressable onPress={quitarLike} style={styles.botonLike}>
-                            <Text>💔</Text>
-                        </Pressable>}
-                        <Text> {props.data.likes.length} likes</Text>
-                        <Pressable>
-                            <TextInput
-                                style={styles.inputComentario}
-                                placeholder="Nuevo comentario"
-                                keyboardType="default"
-                                onChangeText={texto => setComentario(texto)}
-                                value={comentario}>
-                            </TextInput>
-                        </Pressable>
-                        <Pressable onPress={agregarComentario} style={styles.botonComentar}>
-                                            <Text style={styles.textoBotonComentar}>Comentar</Text>
-                        </Pressable>
+        <View style={styles.container}>
+            <Text style={styles.autor}>Creado por: {post.email}</Text>
+            <Text style={styles.texto}>{post.descriptionPost}</Text>
+            
+            {!like? <Pressable onPress={darLike} style={styles.botonLike}>
+                <Text>❤️</Text>
+            </Pressable>:
+            <Pressable onPress={quitarLike} style={styles.botonLike}>
+                <Text>💔</Text>
+            </Pressable>}
+            <Text> {post.likes?.length} likes</Text>
+            <FlatList
+            data={post.comentarios}
+            keyExtractor={(item) => item.id}
+            renderItem={({item})=>(
+                <View>
+                    <Text>{item.autor}</Text>
+                    <Text>{item.texto}</Text>
+                </View>
+            )}
+            />
+            <TextInput
+                style={styles.inputComentario}
+                placeholder="Comenta el post"
+                keyboardType="default"
+                onChangeText={texto => setComentario(texto)}
+                value={comentario}>
+            </TextInput>
+            <Pressable onPress={agregarComentario} style={styles.botonComentar}>
+                <Text style={styles.textoBotonComentar}>Publicar comentario</Text>
+            </Pressable>
         </View>
     )
 }
 const styles = StyleSheet.create({
-    cajaPost: {
+    container: {
+        paddingHorizontal: 10,
+        margin: 10,
+        flex: 1,
         borderWidth: 1,         
         borderColor: "#ccc",    
-        padding: 10,             
-        marginBottom: 20,        
+        padding: 10,                   
         borderRadius: 5,         
         backgroundColor: "#fff"  
     },

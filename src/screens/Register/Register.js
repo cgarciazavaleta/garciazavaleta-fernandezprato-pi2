@@ -19,10 +19,7 @@ function Register(props){
                 createdAt: Date.now()
             })
             .then(() => {
-                auth.signOut()
-                .then(()=>{
-                    props.navigation.navigate('Login')
-                })
+                props.navigation.navigate('Login')
             })   
             setRegister(true);
         }) 
