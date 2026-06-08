@@ -5,8 +5,18 @@ import Post from "../../components/Posts/Posts";
 
 function Perfil(props){
     const[misPosts,setMisPosts]= useState([])
+    const[userName,setUserName]= useState([])
 
     useEffect(()=>{
+        db.collection("users")
+        .where("email", "==", auth.currentUser.email)
+        .onSnapshot(docs => {
+            docs.forEach(doc =>{
+                setUserName(doc.data())
+            })
+        })
+
+
         db.collection("posts")
         .where("email", "==", auth.currentUser.email)
         .onSnapshot(docs => {
@@ -30,7 +40,7 @@ function Perfil(props){
 
     return(
         <View style={styles.container}>
-            <Text>{auth.currentUser.userName}</Text>
+            <Text>{userName.userName}</Text>
             <Text style={styles.nombre}>{auth.currentUser.email}</Text>
             <FlatList
                 data={misPosts}

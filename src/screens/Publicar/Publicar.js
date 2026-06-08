@@ -2,8 +2,9 @@ import React from "react";
 import {View, Text, Pressable, StyleSheet, TextInput} from 'react-native'
 import { auth, db } from "../../firebase/config"
 import { useState } from "react"
+import Home from "../Home/Home";
 
-function Publicar(){
+function Publicar(props){
     const[descriptionPost,setDescriptionPost]= useState("")
 
     function crearPost(){
@@ -14,7 +15,8 @@ function Publicar(){
             createdAt: Date.now(),
         })
         .then((response)=>{
-            setDescriptionPost("")
+            setDescriptionPost(""),
+            props.navigation.navigate('StackMenu',{screen: "Home"})
         })
         .catch(error =>{console.log(error)})
     }

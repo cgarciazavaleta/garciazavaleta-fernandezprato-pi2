@@ -7,19 +7,20 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Publicar from "../../screens/Publicar/Publicar";
+import StackMenu from "../StackMenu/StackMenu";
 const Tab = createBottomTabNavigator()
 
 function HomeMenu(props){
     return(
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={Home} 
-            options= {{tabBarIcon: () => <Entypo name="home" size={24} color="black" />}}
+            <Tab.Screen name="StackMenu" component={StackMenu} 
+            options= {{tabBarIcon: () => <Entypo name="home" size={24} color="black" />, headerShown: false}}
             />
             <Tab.Screen name="Publicar" component={ Publicar }
-            options= {{tabBarIcon: () => <Ionicons name="add-circle" size={24} color="black" />}} 
+            options= {{tabBarIcon: () => <Ionicons name="add-circle" size={24} color="black" />, headerShown: false}} 
             />
             <Tab.Screen name="Perfil" component={ Perfil } screenOptions={{tabBarShowLabel:false}}
-            options= {{tabBarIcon: () => <FontAwesome name="user" size={24} color="black" />}}
+            options= {{tabBarIcon: () => <FontAwesome name="user" size={24} color="black" />, headerShown: false}}
             />
         </Tab.Navigator>
     )

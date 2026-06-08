@@ -30,9 +30,8 @@ function Comentarios(props){
                 fecha: Date.now()
             }
         db.collection("posts")
-        .doc(props.id)
+        .doc(id)
         .update({
-           
             comentarios: firebase.firestore.FieldValue.arrayUnion(nuevoComentario)
         })
         .then(()=>{
@@ -43,7 +42,7 @@ function Comentarios(props){
 
     function darLike(){
         db.collection("posts")
-        .doc(props.id)
+        .doc(id)
         .update({
             likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
@@ -54,7 +53,7 @@ function Comentarios(props){
 
     function quitarLike(){
         db.collection("posts")
-        .doc(props.id)
+        .doc(id)
         .update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
@@ -79,9 +78,9 @@ function Comentarios(props){
             data={post.comentarios}
             keyExtractor={(item) => item.id}
             renderItem={({item})=>(
-                <View>
-                    <Text>{item.autor}</Text>
-                    <Text>{item.texto}</Text>
+                <View style={styles.container}>
+                    <Text style={styles.autor}>{item.autor}</Text>
+                    <Text style={styles.texto}>{item.texto}</Text>
                 </View>
             )}
             />
