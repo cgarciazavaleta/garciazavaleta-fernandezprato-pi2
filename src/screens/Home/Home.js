@@ -23,7 +23,7 @@ function Home(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Posteos</Text>
+            <Text style={styles.title}>Home</Text>
             <FlatList
                 data={posts}
                 keyExtractor={(item) => item.id}

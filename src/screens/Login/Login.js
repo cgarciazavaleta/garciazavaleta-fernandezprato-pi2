@@ -31,12 +31,14 @@ function Login(props){
             props.navigation.navigate("HomeMenu")
         })
         .catch(error => {
-            setLoginError("credenciales invalidas")
+            alert("Credenciales invalidas")
         })
 
     }
 
     return(
+        <View>
+         <Text style={styles.title}>Login</Text>
          <View style={styles.container}>
                 <TextInput 
                     style={styles.input}
@@ -59,6 +61,7 @@ function Login(props){
                    <Pressable style={styles.boton} onPress={()=> props.navigation.navigate('Register')}>
                     <Text>Ir a Registrarse</Text>
                 </Pressable>
+        </View>
         </View>
     )
 }
@@ -103,6 +106,12 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         backgroundColor: '#dddddddd',
     },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        margin: 10,
+    }
 });
 
 export default Login;
