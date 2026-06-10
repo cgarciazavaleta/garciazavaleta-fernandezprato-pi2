@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         alignItems: "center",
         marginBottom: 15,
-        marginTop: 15
+        marginTop: 10
     },
     textoBoton: {
         fontWeight: "bold"
