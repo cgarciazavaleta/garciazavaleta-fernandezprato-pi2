@@ -24,11 +24,13 @@ function Register(props){
             setRegister(true);
         }) 
         .catch( error => {
-            console.log(error)
+            console.log(error),
+            alert(error)
         })
     }
     return(
         <View style={styles.container}>
+            <Text style={styles.title}>Register</Text>
             <TextInput 
               style={styles.input}
               keyboardType="email-adress"
@@ -75,6 +77,11 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical: 10
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
     },
     btn: {
         backgroundColor: '#941f14ff',

@@ -5,7 +5,7 @@ import Post from "../../components/Posts/Posts";
 
 function Perfil(props){
     const[misPosts,setMisPosts]= useState([])
-    const[userName,setUserName]= useState([])
+    const[userName,setUserName]= useState({})
 
     useEffect(()=>{
         db.collection("users")
@@ -40,8 +40,9 @@ function Perfil(props){
 
     return(
         <View style={styles.container}>
-            <Text>{userName.userName}</Text>
-            <Text style={styles.nombre}>{auth.currentUser.email}</Text>
+            <Text style={styles.title}>Perfil</Text>
+            <Text style={styles.nombre}>Usuario: {userName.userName}</Text>
+            <Text style={styles.nombre}>Mail: {auth.currentUser.email}</Text>
             <FlatList
                 data={misPosts}
                 keyExtractor={(item) => item.id}
@@ -97,6 +98,11 @@ const styles = StyleSheet.create({
     },
     textoBoton: {
         fontWeight: "bold"
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
     }
 });
 
