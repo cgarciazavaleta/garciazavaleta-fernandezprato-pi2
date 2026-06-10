@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         container: {
         paddingHorizontal: 10,
         marginTop: 20,
+        flex:1
     },
     cajaPost: {
         borderWidth: 1,         
@@ -90,7 +91,9 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         borderRadius: 4,
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 15,
+        marginTop: 15
     },
     textoBoton: {
         fontWeight: "bold"

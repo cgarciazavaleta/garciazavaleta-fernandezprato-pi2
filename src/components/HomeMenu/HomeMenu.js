@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator()
 function HomeMenu(props){
     return(
         <Tab.Navigator>
-            <Tab.Screen name="StackMenu" component={StackMenu} 
+            <Tab.Screen name="Home" component={StackMenu} 
             options= {{tabBarIcon: () => <Entypo name="home" size={24} color="black" />, headerShown: false}}
             />
             <Tab.Screen name="Publicar" component={ Publicar }

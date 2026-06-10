@@ -16,7 +16,7 @@ function Publicar(props){
         })
         .then((response)=>{
             setDescriptionPost(""),
-            props.navigation.navigate('StackMenu',{screen: "Home"})
+            props.navigation.navigate('Home',{screen: "Home"})
         })
         .catch(error =>{console.log(error)})
     }
