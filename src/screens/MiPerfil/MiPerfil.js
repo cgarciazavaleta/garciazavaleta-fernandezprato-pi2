@@ -8,6 +8,7 @@ function Perfil(props){
     const[userName,setUserName]= useState({})
 
     useEffect(()=>{
+        const email = auth.currentUser.email
         db.collection("users")
         .where("email", "==", auth.currentUser.email)
         .onSnapshot(docs => {
@@ -63,7 +64,8 @@ const styles = StyleSheet.create({
         container: {
         paddingHorizontal: 10,
         marginTop: 20,
-        flex:1
+        flex:1,
+        marginHorizontal:10
     },
     cajaPost: {
         borderWidth: 1,         
@@ -90,17 +92,19 @@ const styles = StyleSheet.create({
     botonLogout: {
         backgroundColor: "#75bed2",
         padding: 10,
-        margin: 5,
         borderRadius: 4,
         alignItems: "center",
         marginBottom: 15,
-        marginTop: 10
+        marginTop: 10,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#929292",
     },
     textoBoton: {
         fontWeight: "bold"
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 10
     }
