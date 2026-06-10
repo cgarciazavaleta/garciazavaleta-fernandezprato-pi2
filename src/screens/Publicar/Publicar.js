@@ -16,7 +16,7 @@ function Publicar(props){
         })
         .then((response)=>{
             setDescriptionPost(""),
-            props.navigation.navigate('Home',{screen: "Home"})
+            props.navigation.navigate('StackMenu',{screen: "Home"})
         })
         .catch(error =>{console.log(error)})
     }
@@ -43,16 +43,15 @@ const styles = StyleSheet.create({
     },
     title:{
         fontSize: 30,
+        marginBottom:10,
         fontWeight:"bold",
-        marginBottom:10
     },
     textForm:{
-        color: "#fff",
+        fontWeight:"bold",
     },
     botonForm:{
-        backgroundColor: '#941f14ff',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
+        backgroundColor: "#75bed2",
+        padding: 10,
         alignItems: "center",
         borderRadius: 4,
         borderWidth: 1,

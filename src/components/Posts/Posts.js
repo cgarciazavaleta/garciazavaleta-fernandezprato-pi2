@@ -112,11 +112,15 @@ const styles = StyleSheet.create({
         height: 40
     },
     botonComentar: {
-        backgroundColor: '#941f14ff',
+        backgroundColor:"#75bed2",
         padding: 10,
         margin: 5,
         borderRadius: 4,
-        alignItems: "center"
+        alignItems: "center",
+        borderWidth: 1,
+        borderStyle: "solid",
+        marginTop: 20,
+        borderColor: "#929292",
     },
     textoBotonComentar: {
         fontWeight: "bold"

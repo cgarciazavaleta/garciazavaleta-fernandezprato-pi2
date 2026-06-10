@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 10,
         marginTop: 20,
-        flex: 1
+        flex: 1,
+        marginHorizontal:10
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 10
     }

@@ -37,9 +37,8 @@ function Login(props){
     }
 
     return(
-        <View>
+        <View style={styles.container}>
          <Text style={styles.title}>Login</Text>
-         <View style={styles.container}>
                 <TextInput 
                     style={styles.input}
                     keyboardType="email-adress"
@@ -62,12 +61,11 @@ function Login(props){
                     <Text>Ir a Registrarse</Text>
                 </Pressable>
         </View>
-        </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         marginTop: 20
     },
     input: {
@@ -81,16 +79,16 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     btn: {
-        backgroundColor: '#941f14ff',
+        backgroundColor: "#4ea0b7",
         paddingHorizontal: 10,
         paddingVertical: 6,
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: "#929292",
     },
     txt: {
-        color: '#fff',
+        fontWeight: 'bold',
         textAlign: 'center'
     },
     boton:{
@@ -107,10 +105,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#dddddddd',
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         marginBottom: 10,
-        margin: 10,
     }
 });
 

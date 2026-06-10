@@ -13,8 +13,8 @@ const Tab = createBottomTabNavigator()
 function HomeMenu(props){
     return(
         <Tab.Navigator>
-            <Tab.Screen name="Home" component={StackMenu} 
-            options= {{tabBarIcon: () => <Entypo name="home" size={24} color="black" />, headerShown: false}}
+            <Tab.Screen name="StackMenu" component={StackMenu} 
+            options= {{tabBarIcon: () => <Entypo name="home" size={24} color="black" />, headerShown: false, tabBarShowLabel: false}}
             />
             <Tab.Screen name="Publicar" component={ Publicar }
             options= {{tabBarIcon: () => <Ionicons name="add-circle" size={24} color="black" />, headerShown: false, tabBarShowLabel: false}} 

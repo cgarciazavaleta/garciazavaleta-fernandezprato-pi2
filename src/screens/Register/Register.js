@@ -65,7 +65,7 @@ function Register(props){
 }
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         marginTop: 20
     },
     input: {
@@ -79,21 +79,21 @@ const styles = StyleSheet.create({
         marginVertical: 10
     },
     title: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
-        marginBottom: 10
+        marginBottom: 10,
     },
     btn: {
-        backgroundColor: '#941f14ff',
+        backgroundColor: "#4ea0b7",
         paddingHorizontal: 10,
         paddingVertical: 6,
         borderRadius: 4,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: "#929292",
     },
     txt: {
-        color: '#fff',
+        fontWeight: 'bold',
         textAlign: 'center'
     },
     boton:{
