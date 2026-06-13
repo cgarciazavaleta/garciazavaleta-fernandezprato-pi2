@@ -1,8 +1,7 @@
-import { View, Text, Pressable, StyleSheet, TextInput } from "react-native" 
+import { View, Text, Pressable, StyleSheet, TextInput, FlatList } from "react-native" 
 import { auth, db } from "../../firebase/config"
 import firebase from "firebase"
 import { useEffect, useState } from "react"
-import { FlatList } from "react-native-web"
 
 function Comentarios(props){
     const id = props.route.params.id
@@ -75,9 +74,9 @@ function Comentarios(props){
             </Pressable>}
             <Text> {post.likes?.length} likes</Text>
             <FlatList
-            data={post.comentarios}
-            keyExtractor={(item) => item.id}
-            renderItem={({item})=>(
+                data={post.comentarios}
+                keyExtractor={(item) => item.id}
+                renderItem={({item})=>(
                 <View style={styles.container}>
                     <Text style={styles.autor}>{item.autor}</Text>
                     <Text style={styles.texto}>{item.texto}</Text>
